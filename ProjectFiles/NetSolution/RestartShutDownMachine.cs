@@ -10,9 +10,11 @@ using QPlatform.NativeUI;
 using QPlatform.CoreBase;
 using QPlatform.NetLogic;
 using System.Diagnostics;
+using QPlatform.CommunicationDriver;
+using QPlatform.Modbus;
 #endregion
 
-public class restart_shutDown_machine : BaseNetLogic
+public class RestartShutDownMachine : BaseNetLogic
 {
     public override void Start()
     {

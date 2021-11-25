@@ -11,6 +11,8 @@ using System.Linq;
 using System.Collections.Generic;
 using QPlatform.SQLiteStore;
 using QPlatform.Store;
+using QPlatform.CommunicationDriver;
+using QPlatform.Modbus;
 #endregion
 
 public class RecipesEditorUISetup : BaseNetLogic

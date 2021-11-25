@@ -71,5 +71,21 @@ Project:
    Uri: 'urn:QPlatform:NetLogic'
    Module: QPlatform.NetLogic
    Version: 4.1.0.0
+  19:
+   Uri: 'urn:QPlatform:CommunicationDriver'
+   Module: QPlatform.CommunicationDriver
+   Version: 4.0.17.80
+  20:
+   Uri: 'urn:QPlatform:CommunicationDriver:Net'
+   Module: QPlatform.CommunicationDriver.Net
+   Version: 3.0.17.80
+  21:
+   Uri: 'urn:QPlatform:ModbusDriver'
+   Module: QPlatform.ModbusDriver
+   Version: 4.0.17.80
+  22:
+   Uri: 'urn:QPlatform:Modbus:Net'
+   Module: QPlatform.Modbus.Net
+   Version: 4.0.17.80
  Nodes:
  - File: Nodes/LibLab.yaml

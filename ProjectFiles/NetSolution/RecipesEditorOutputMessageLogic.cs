@@ -11,6 +11,8 @@ using QPlatform.OPCUAServer;
 using QPlatform.Store;
 using System.Timers;
 using QPlatform.SQLiteStore;
+using QPlatform.CommunicationDriver;
+using QPlatform.Modbus;
 #endregion
 
 public class RecipesEditorOutputMessageLogic : BaseNetLogic

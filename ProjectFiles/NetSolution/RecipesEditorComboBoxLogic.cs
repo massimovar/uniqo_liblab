@@ -10,6 +10,8 @@ using QPlatform.Recipe;
 using QPlatform.UI;
 using QPlatform.Store;
 using QPlatform.SQLiteStore;
+using QPlatform.CommunicationDriver;
+using QPlatform.Modbus;
 #endregion
 
 public class RecipesEditorComboBoxLogic : BaseNetLogic
