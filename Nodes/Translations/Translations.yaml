@@ -9,18 +9,19 @@ Children:
   Value: 
    {
     "Type": 12,
-    "Dimensions": [11,2],
+    "Dimensions": [12,3],
     "Body": [
-     "","en-US",
-     "Save","Save",
-     "Delete","Delete",
-     "RecipeApply","Recipe applied",
-     "Apply","Apply",
-     "Load","Load",
-     "RecipeDeleted","Recipe deleted",
-     "RecipeLoaded","Recipe loaded",
-     "ActiveRecipe","Active recipe",
-     "Rename","Rename",
-     "RecipesTable","Recipes table"
+     "","en-US","it-IT",
+     "Save","Save","Salva",
+     "Delete","Delete","Cancella",
+     "RecipeApply","Recipe applied","Ricetta applicata",
+     "Apply","Apply","Applica",
+     "Load","Load","Carica",
+     "RecipeDeleted","Recipe deleted","Ricetta eliminata",
+     "RecipeUploaded","Recipe uploaded","Ricetta caricata",
+     "ActiveRecipe","Active recipe","",
+     "Rename","Rename","",
+     "RecipesTable","Recipes table","",
+     "Upload","Upload","Carica"
     ]
    }

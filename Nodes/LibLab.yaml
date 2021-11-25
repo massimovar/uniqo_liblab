@@ -10,13 +10,13 @@ Children:
   DataType: String
   ValueRank: OneDimension
   ArrayDimensions: [0]
-  Value: ["en-US"]
+  Value: ["en-US","it-IT"]
 - Name: LocaleFallbackList
   Type: BaseDataVariableType
   DataType: String
   ValueRank: OneDimension
   ArrayDimensions: [0]
-  Value: ["en-US"]
+  Value: ["it-IT"]
 - File: UI/UI.yaml
 - File: Model/Model.yaml
 - File: Converters/Converters.yaml
@@ -40,3 +40,7 @@ Children:
     Type: PropertyType
     DataType: NodeId
     Value: {"IdType":2,"Id":"8a1296f18f011a670d219775e989e216","Namespace":6}
+- Name: builded with Uniqo version
+  Type: BaseDataVariableType
+  DataType: String
+  Value: "1.0.41.135"

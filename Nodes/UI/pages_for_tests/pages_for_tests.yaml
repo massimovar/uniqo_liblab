@@ -1,4 +1,4 @@
-Name: pages
+Name: pages_for_tests
 Type: FolderType
 Children:
 - Name: page1
@@ -798,8 +798,8 @@ Children:
                   Value: "../../../../../../LastSelectedRecipeName@NodeId"
               - Name: Value
                 Type: BaseDataVariableType
-                DataType: String
-                Value: ""
+                DataType: LocalizedText
+                Value: {"LocaleId":"en-US","Text":""}
                 Children:
                 - Name: DynamicLink
                   Type: DataBind
@@ -1042,6 +1042,21 @@ Children:
         Type: DataBind
         DataType: NodePath
         Value: "{NodeId:ns=6;g=35ac8eec-4341-722f-741d-782bec317c34}"
+    - Name: VerticalAlignment
+      Type: BaseVariableType
+      DataType: VerticalAlignment
+      ModellingRule: Optional
+      Value: 3
+    - Name: Height
+      Type: BaseVariableType
+      DataType: Size
+      ModellingRule: Optional
+      Value: 300.0
+    - Name: TopMargin
+      Type: BaseVariableType
+      DataType: Size
+      ModellingRule: Optional
+      Value: 40.0
 - Name: page2
   Id: g=4d28c948255fcf08a70a69baa6ba311b
   Supertype: Panel

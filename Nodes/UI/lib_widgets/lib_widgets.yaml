@@ -1001,7 +1001,7 @@ Children:
       Type: BaseDataVariableType
       DataType: LocalizedText
       ModellingRule: Optional
-      Value: {"NamespaceIndex":6,"TextId":"Load"}
+      Value: {"NamespaceIndex":6,"TextId":"Upload"}
     - Name: Width
       Type: BaseVariableType
       DataType: Size
@@ -1303,9 +1303,9 @@ Children:
                   Value: 2
             - Name: Value
               Type: BaseDataVariableType
-              DataType: String
+              DataType: LocalizedText
               Description: {"NamespaceIndex":2,"TextId":"SetValueDescription"}
-              Value: ""
+              Value: {"LocaleId":"en-US","Text":""}
               Children:
               - Name: DynamicLink
                 Type: DataBind

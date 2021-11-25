@@ -18,10 +18,19 @@ public class RecipesEditorComboBoxLogic : BaseNetLogic
 	{
 		var comboBox = (ComboBox)Owner;
 		comboBox.SelectedValueVariable.VariableChange += SelectedValueVariable_VariableChange;
-		// TODO:
-		// var lastSelectedRecipeName = Owner.Owner.GetVariable("LastSelectedRecipeName")?.Value.ToString();
-		// if (string.IsNullOrEmpty(lastSelectedRecipeName)) return;
-		// comboBox.SelectedValue = lastSelectedRecipeName;
+
+		var lastSelectedRecipeName = Owner.Owner.GetVariable("LastSelectedRecipeName")?.Value;
+		if (lastSelectedRecipeName == null) return;
+
+		var lastSelectedRecipe = lastSelectedRecipeName.Value as Object;
+		var lastSelectedRecipeLT = lastSelectedRecipe as LocalizedText;
+		
+		if (string.IsNullOrEmpty(lastSelectedRecipeLT.Text) || lastSelectedRecipeLT.Text == "0") {
+			SelectedValueVariable_VariableChange(null, null);
+			return;
+		}
+
+		comboBox.SelectedValue = lastSelectedRecipeLT;
 	}
 
 	private void SelectedValueVariable_VariableChange(object sender, VariableChangeEventArgs e)
