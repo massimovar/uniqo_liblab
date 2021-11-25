@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module version="1">
+    <Name>LibLabUserDefinedModule</Name>
+    <Company></Company>
+    <Version>0.0.0</Version>
+    <MinUpgradableVersion>0.0.0</MinUpgradableVersion>
+    <Binding name="Net" />
+
+    <Namespaces/>
+
+    <Dependencies>
+        <Core version="0.0.0" />
+        <Binding version="0.0.0" />
+        <Module name="QPlatform.HMIProject.Net" version="0.0.0" />
+    </Dependencies>
+
+    <Nodes/>
+
+    <TypeMappings>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="ff35424dbd0a462a6f76aebe7210fb1e" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="fc6c34e088e1f2f4e4347d978a2279da" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="4d28c948255fcf08a70a69baa6ba311b" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="43bd9fb016d2f4c22dcac897fff4052a" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="e73026340a8176a848f3b69a172c5be0" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="c852a7a73047569e593f76527f15438f" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
+                <NodeId namespaceUri="LibLab" guid="798abe481fbd03a6ae59b6cb155b9a22" />
+            </TargetType>
+        </TypeMapping>
+    </TypeMappings>
+</Module>

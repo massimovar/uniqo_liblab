@@ -1,0 +1,26 @@
+Name: Translations
+Type: FolderType
+Children:
+- Name: LocalizationDictionary1
+  Type: LocalizationDictionary
+  DataType: String
+  ValueRank: OneOrMoreDimensions
+  ArrayDimensions: [0,0]
+  Value: 
+   {
+    "Type": 12,
+    "Dimensions": [11,2],
+    "Body": [
+     "","en-US",
+     "Save","Save",
+     "Delete","Delete",
+     "RecipeApply","Recipe applied",
+     "Apply","Apply",
+     "Load","Load",
+     "RecipeDeleted","Recipe deleted",
+     "RecipeLoaded","Recipe loaded",
+     "ActiveRecipe","Active recipe",
+     "Rename","Rename",
+     "RecipesTable","Recipes table"
+    ]
+   }

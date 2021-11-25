@@ -1,0 +1,97 @@
+Name: Recipes
+Type: FolderType
+Children:
+- Name: RecipeSchema1
+  Id: g=463d2da1270622e73d6a721247ed35ee
+  Type: RecipeSchema
+  Children:
+  - Name: Root
+    Type: BaseObjectType
+    Children:
+    - Name: Variable1
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 0
+    - Name: Variable2
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+    - Name: Variable3
+      Type: BaseDataVariableType
+      DataType: Float
+      Value: 0.0
+    - Name: Variable4
+      Type: BaseDataVariableType
+      DataType: String
+      Value: ""
+  - Class: Reference
+    Target: ns=11;i=27
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=33
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=31
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=44
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=35
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=37
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=53
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=62
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=55
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=58
+    Direction: Forward
+  - Class: Reference
+    Target: ns=11;i=60
+    Direction: Forward
+  - Name: TargetNode
+    Type: NodePointer
+    DataType: NodeId
+    Value: {"IdType":2,"Id":"a5a3935b3886403207618e8fd832541e","Namespace":6}
+    Children:
+    - Name: Kind
+      Type: PropertyType
+      DataType: NodeId
+      Value: {"IdType":0,"Id":0,"Namespace":-1}
+  - Name: Store
+    Type: NodePointer
+    DataType: NodeId
+    Value: {"IdType":2,"Id":"acf00e7368b01d98287b1d62580369db","Namespace":6}
+    Children:
+    - Name: Kind
+      Type: PropertyType
+      DataType: NodeId
+      Value: {"Id":1,"Namespace":14}
+  - Name: EditModel
+    Id: g=dbe950051cf5cacbd065187930e3c803
+    Type: BaseObjectType
+    Children:
+    - Name: Variable1
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: 0
+    - Name: Variable2
+      Type: BaseDataVariableType
+      DataType: Boolean
+      Value: false
+    - Name: Variable3
+      Type: BaseDataVariableType
+      DataType: Float
+      Value: 0.0
+    - Name: Variable4
+      Type: BaseDataVariableType
+      DataType: String
+      Value: ""
