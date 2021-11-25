@@ -14,201 +14,207 @@ using QPlatform.Store;
 
 public class RecipesEditorSaveButtonLogic : BaseNetLogic
 {
-	public override void Start()
-	{
-		AddTranslations();
-	}
+    public override void Start()
+    {
+        AddTranslations();
+    }
 
-	[ExportMethod]
-	public void RenameRecipe(string oldRecipeName, string newRecipeName, NodeId recipeSchema)
-	{
-		try
-		{
-			var schema = GetRecipeSchema(recipeSchema);
-			CreateOrSaveRecipe(newRecipeName, recipeSchema);
-			schema.DeleteStoreRecipe(oldRecipeName);
-			var activeRecipeName = Owner.Owner.GetVariable("ActiveRecipeName").Value.Value.ToString(); // TODO check!
-			if (activeRecipeName != oldRecipeName) return;
-			Owner.Owner.GetVariable("ActiveRecipeName").Value = newRecipeName;
-		}
-		catch (Exception e)
-		{
-			Log.Error("RenameRecipe", e.Message);
-			SetOutputMessage($"{GetLocalizedTextString("RecipesEditorErrorSavingRecipe")} {e.Message}");
-		}
-	}
+    [ExportMethod]
+    public void RenameRecipe(string oldRecipeName, string newRecipeName, NodeId recipeSchema)
+    {
+        try
+        {
+            var schema = GetRecipeSchema(recipeSchema);
+            CreateOrSaveRecipe(newRecipeName, recipeSchema);
+            schema.DeleteStoreRecipe(oldRecipeName);
+            var activeRecipeName = Owner.Owner.GetVariable("ActiveRecipeName").Value.Value.ToString();
+            if (activeRecipeName != oldRecipeName) return;
+            Owner.Owner.GetVariable("ActiveRecipeName").Value = newRecipeName;
+            SetSelectedValueOnCombo(newRecipeName);
+        }
+        catch (Exception e)
+        {
+            Log.Error("RenameRecipe", e.Message);
+            SetOutputMessage($"{GetLocalizedTextString("RecipesEditorErrorSavingRecipe")} {e.Message}");
+        }
+    }
 
-	[ExportMethod]
-	public void CreateOrSaveRecipe(string recipeName, NodeId recipeSchema)
-	{
-		try
-		{
-			if (String.IsNullOrEmpty(recipeName))
-				throw new Exception(GetLocalizedTextString("RecipesEditorRecipeNameEmpty"));
+    [ExportMethod]
+    public void CreateOrSaveRecipe(string recipeName, NodeId recipeSchema)
+    {
+        try
+        {
+            if (String.IsNullOrEmpty(recipeName))
+                throw new Exception(GetLocalizedTextString("RecipesEditorRecipeNameEmpty"));
 
-			if(recipeSchema == null || recipeSchema == NodeId.Empty)
-				throw new Exception(GetLocalizedTextString("RecipesEditorRecipeSchemaNodeIdEmpty"));
+            if (recipeSchema == null || recipeSchema == NodeId.Empty)
+                throw new Exception(GetLocalizedTextString("RecipesEditorRecipeSchemaNodeIdEmpty"));
 
-			var schema = GetRecipeSchema(recipeSchema);
-			var store = GetRecipeStore(schema);
-			var editModel = GetEditModel(schema);
+            var schema = GetRecipeSchema(recipeSchema);
+            var store = GetRecipeStore(schema);
+            var editModel = GetEditModel(schema);
 
-			if (RecipeExistsInStore(store, schema, recipeName))
-			{
-				// Save Recipe
-				schema.CopyToStoreRecipe(editModel.NodeId, recipeName, CopyErrorPolicy.BestEffortCopy);
-				SetOutputMessage($"{GetLocalizedTextString("RecipesEditorRecipe")} {recipeName} {GetLocalizedTextString("RecipesEditorSaved")}");
-				return;
-			}
+            if (RecipeExistsInStore(store, schema, recipeName))
+            {
+                // Save Recipe
+                schema.CopyToStoreRecipe(editModel.NodeId, recipeName, CopyErrorPolicy.BestEffortCopy);
+                SetOutputMessage($"{GetLocalizedTextString("RecipesEditorRecipe")} {recipeName} {GetLocalizedTextString("RecipesEditorSaved")}");
+                return;
+            }
 
-			// Create recipe
-			schema.CreateStoreRecipe(recipeName);
+            // Create recipe
+            schema.CreateStoreRecipe(recipeName);
 
-			// Save Recipe
-			schema.CopyToStoreRecipe(editModel.NodeId, recipeName, CopyErrorPolicy.BestEffortCopy);
+            // Save Recipe
+            schema.CopyToStoreRecipe(editModel.NodeId, recipeName, CopyErrorPolicy.BestEffortCopy);
 
-			var comboBox = GetComboBox();
-			comboBox.Refresh();
-			comboBox.SelectedValue = recipeName;
+            SetSelectedValueOnCombo(recipeName);
 
-			SetOutputMessage($"{GetLocalizedTextString("RecipesEditorRecipe")} {recipeName} {GetLocalizedTextString("RecipesEditorCreatedAndSaved")}");
-		}
-		catch (Exception e)
-		{
-			Log.Error("CreateOrSaveRecipe", e.Message);
-			SetOutputMessage($"{GetLocalizedTextString("RecipesEditorErrorSavingRecipe")} {e.Message}");
-		}
-	}
+            SetOutputMessage($"{GetLocalizedTextString("RecipesEditorRecipe")} {recipeName} {GetLocalizedTextString("RecipesEditorCreatedAndSaved")}");
+        }
+        catch (Exception e)
+        {
+            Log.Error("CreateOrSaveRecipe", e.Message);
+            SetOutputMessage($"{GetLocalizedTextString("RecipesEditorErrorSavingRecipe")} {e.Message}");
+        }
+    }
 
-	private RecipeSchema GetRecipeSchema(NodeId recipeSchemaNodeId)
-	{
-		// Get RecipeSchema node from its NodeId
-		var recipeSchemaNode = InformationModel.GetObject(recipeSchemaNodeId);
-		if (recipeSchemaNode == null)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorRecipeNotFound")} {recipeSchemaNodeId}");
+    private void SetSelectedValueOnCombo(string recipeName)
+    {
+        var comboBox = GetComboBox();
+        comboBox.Refresh();
+        comboBox.SelectedValue = recipeName;
+    }
 
-		// Check that it is actually a RecipeSchema
-		var schema = recipeSchemaNode as RecipeSchema;
-		if (schema == null)
-			throw new Exception($"{recipeSchemaNode.BrowseName} {GetLocalizedTextString("RecipesEditorNotARecipe")}");
+    private RecipeSchema GetRecipeSchema(NodeId recipeSchemaNodeId)
+    {
+        // Get RecipeSchema node from its NodeId
+        var recipeSchemaNode = InformationModel.GetObject(recipeSchemaNodeId);
+        if (recipeSchemaNode == null)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorRecipeNotFound")} {recipeSchemaNodeId}");
 
-		return schema;
-	}
+        // Check that it is actually a RecipeSchema
+        var schema = recipeSchemaNode as RecipeSchema;
+        if (schema == null)
+            throw new Exception($"{recipeSchemaNode.BrowseName} {GetLocalizedTextString("RecipesEditorNotARecipe")}");
 
-	private Store.Store GetRecipeStore(RecipeSchema schema)
-	{
-		// Check if the store is set
-		if (schema.Store == NodeId.Empty)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorStoreOfSchema")} {schema.BrowseName} {GetLocalizedTextString("RecipesEditorNotSet")}");
+        return schema;
+    }
 
-		// Get store node
-		var storeNode = InformationModel.GetObject(schema.Store);
-		if (storeNode == null)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorStore")} {schema.Store} {GetLocalizedTextString("RecipesEditorNotFound")}");
+    private Store.Store GetRecipeStore(RecipeSchema schema)
+    {
+        // Check if the store is set
+        if (schema.Store == NodeId.Empty)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorStoreOfSchema")} {schema.BrowseName} {GetLocalizedTextString("RecipesEditorNotSet")}");
 
-		// Check that it is actually a store
-		var store = storeNode as Store.Store;
-		if (store == null)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorStore")} {store.BrowseName} {GetLocalizedTextString("RecipesEditorNotAStore")}");
+        // Get store node
+        var storeNode = InformationModel.GetObject(schema.Store);
+        if (storeNode == null)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorStore")} {schema.Store} {GetLocalizedTextString("RecipesEditorNotFound")}");
 
-		return store;
-	}
+        // Check that it is actually a store
+        var store = storeNode as Store.Store;
+        if (store == null)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorStore")} {store.BrowseName} {GetLocalizedTextString("RecipesEditorNotAStore")}");
 
-	private IUANode GetEditModel(RecipeSchema schema)
-	{
-		var editModel = schema.Get("EditModel");
-		if (editModel == null)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorEditModelOfSchema")} {schema.BrowseName} {GetLocalizedTextString("RecipesEditorNotFound")}");
+        return store;
+    }
 
-		return editModel;
-	}
+    private IUANode GetEditModel(RecipeSchema schema)
+    {
+        var editModel = schema.Get("EditModel");
+        if (editModel == null)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorEditModelOfSchema")} {schema.BrowseName} {GetLocalizedTextString("RecipesEditorNotFound")}");
 
-	private bool RecipeExistsInStore(Store.Store store, RecipeSchema schema, string recipeName)
-	{
-		// Perform query on the store in order to check if the recipe already exists
-		object[,] resultSet;
-		string[] header;
-		var tableName = !String.IsNullOrEmpty(schema.TableName) ? schema.TableName : schema.BrowseName;
-		store.Query("SELECT * FROM \"" + tableName + "\" WHERE Name LIKE \'" + recipeName + "\'", out header, out resultSet);
-		var rowCount = resultSet != null ? resultSet.GetLength(0) : 0;
-		return rowCount > 0;
-	}
+        return editModel;
+    }
 
-	private ComboBox GetComboBox()
-	{
-		// Find ComboBox
-		var comboBoxNode = Owner.Owner.Get("RecipesComboBox");
-		if (comboBoxNode == null)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorRecipesComboBoxNotFound")}");
+    private bool RecipeExistsInStore(Store.Store store, RecipeSchema schema, string recipeName)
+    {
+        // Perform query on the store in order to check if the recipe already exists
+        object[,] resultSet;
+        string[] header;
+        var tableName = !String.IsNullOrEmpty(schema.TableName) ? schema.TableName : schema.BrowseName;
+        store.Query("SELECT * FROM \"" + tableName + "\" WHERE Name LIKE \'" + recipeName + "\'", out header, out resultSet);
+        var rowCount = resultSet != null ? resultSet.GetLength(0) : 0;
+        return rowCount > 0;
+    }
 
-		// Check that it is actually a ComboBox
-		ComboBox comboBox = comboBoxNode as ComboBox;
-		if (comboBox == null)
-			throw new Exception($"{comboBoxNode.BrowseName} {GetLocalizedTextString("RecipesEditorNotAComboBox")}");
+    private ComboBox GetComboBox()
+    {
+        // Find ComboBox
+        var comboBoxNode = Owner.Owner.Get("RecipesComboBox");
+        if (comboBoxNode == null)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorRecipesComboBoxNotFound")}");
 
-		return comboBox;
-	}
+        // Check that it is actually a ComboBox
+        ComboBox comboBox = comboBoxNode as ComboBox;
+        if (comboBox == null)
+            throw new Exception($"{comboBoxNode.BrowseName} {GetLocalizedTextString("RecipesEditorNotAComboBox")}");
 
-	private void SetOutputMessage(string message)
-	{
-		var outputMessageLabelNode = Owner.Owner.Get("OutputMessage");
-		if(outputMessageLabelNode == null)
-			throw new Exception($"{GetLocalizedTextString("RecipesEditorOutputMessageLabelNotFound")}");
+        return comboBox;
+    }
 
-		var outputMessageLogic1 = outputMessageLabelNode.GetObject("RecipesEditorOutputMessageLogic");
-		outputMessageLogic1.ExecuteMethod("SetOutputMessage", new object[] { message });
-	}
+    private void SetOutputMessage(string message)
+    {
+        var outputMessageLabelNode = Owner.Owner.Get("OutputMessage");
+        if (outputMessageLabelNode == null)
+            throw new Exception($"{GetLocalizedTextString("RecipesEditorOutputMessageLabelNotFound")}");
 
-	private string GetLocalizedTextString(string textId)
-	{
-		var localizedText = new LocalizedText(textId);
-		var stringFound = InformationModel.LookupTranslation(localizedText).Text;
+        var outputMessageLogic1 = outputMessageLabelNode.GetObject("RecipesEditorOutputMessageLogic");
+        outputMessageLogic1.ExecuteMethod("SetOutputMessage", new object[] { message });
+    }
 
-		if (string.IsNullOrEmpty(stringFound)) // fallback to en-US
-			return InformationModel.LookupTranslation(localizedText, new List<string>() { "en-US" }).Text;
+    private string GetLocalizedTextString(string textId)
+    {
+        var localizedText = new LocalizedText(textId);
+        var stringFound = InformationModel.LookupTranslation(localizedText).Text;
 
-		return stringFound;
-	}
+        if (string.IsNullOrEmpty(stringFound)) // fallback to en-US
+            return InformationModel.LookupTranslation(localizedText, new List<string>() { "en-US" }).Text;
 
-	private void AddTranslationIfNeeded(string key, string it, string en)
-	{
-		var alreadyExistsTranslation = !string.IsNullOrEmpty(InformationModel.LookupTranslation(new LocalizedText(key)).Text);
-		if (alreadyExistsTranslation)
-			return;
+        return stringFound;
+    }
 
-		string englishLocale = "en-US";
-		if (Project.Current.Locales.Contains(englishLocale))
-		{
-			var localizedTextEnglish = new LocalizedText(Project.Current.NodeId.NamespaceIndex, key, en, englishLocale);
-			InformationModel.AddTranslation(localizedTextEnglish);
-		}
+    private void AddTranslationIfNeeded(string key, string it, string en)
+    {
+        var alreadyExistsTranslation = !string.IsNullOrEmpty(InformationModel.LookupTranslation(new LocalizedText(key)).Text);
+        if (alreadyExistsTranslation)
+            return;
 
-		string italianLocale = "it-IT";
-		if (Project.Current.Locales.Contains(italianLocale))
-		{
-			var localizedTextItalian = new LocalizedText(Project.Current.NodeId.NamespaceIndex, key, it, italianLocale);
-			InformationModel.SetTranslation(localizedTextItalian);
-		}
-	}
+        string englishLocale = "en-US";
+        if (Project.Current.Locales.Contains(englishLocale))
+        {
+            var localizedTextEnglish = new LocalizedText(Project.Current.NodeId.NamespaceIndex, key, en, englishLocale);
+            InformationModel.AddTranslation(localizedTextEnglish);
+        }
 
-	private void AddTranslations()
-	{
-		AddTranslationIfNeeded("RecipesEditorRecipeNameEmpty", "Il nome della ricetta è vuoto", "Recipe name is empty");
-		AddTranslationIfNeeded("RecipesEditorRecipeSchemaNodeIdEmpty", "Il nodeId dello schema della ricetta è vuoto", "Recipe schema nodeId is empty");
-		AddTranslationIfNeeded("RecipesEditorRecipe", "Ricetta", "Recipe");
-		AddTranslationIfNeeded("RecipesEditorSaved", "aggiornata", "updated");
-		AddTranslationIfNeeded("RecipesEditorCreatedAndSaved", "creata e salvata", "created and saved");
-		AddTranslationIfNeeded("RecipesEditorErrorSavingRecipe", "Errore nel salvataggio della ricetta:", "Error saving recipe:");
-		AddTranslationIfNeeded("RecipesEditorRecipeNotFound", "Ricetta non trovata, nodeId:", "Recipe not found, nodeId:");
-		AddTranslationIfNeeded("RecipesEditorNotARecipe", "non è una ricetta", "is not a recipe");
-		AddTranslationIfNeeded("RecipesEditorStoreOfSchema", "Lo store dello schema", "Store of schema");
-		AddTranslationIfNeeded("RecipesEditorNotSet", "non è impostato", "is not set");
-		AddTranslationIfNeeded("RecipesEditorStore", "Store", "Store");
-		AddTranslationIfNeeded("RecipesEditorNotFound", "non trovato", "not found");
-		AddTranslationIfNeeded("RecipesEditorNotAStore", "non è uno store", "is not a store");
-		AddTranslationIfNeeded("RecipesEditorEditModelOfSchema", "EditModel dello schema", "EditModel of schema");
-		AddTranslationIfNeeded("RecipesEditorRecipesComboBoxNotFound", "Nodo RecipesComboBox non trovato", "RecipesComboBox node not found");
-		AddTranslationIfNeeded("RecipesEditorNotAComboBox", "non è una comboBox", "is not a comboBox");
-		AddTranslationIfNeeded("RecipesEditorOutputMessageLabelNotFound", "Etichetta OutputMessage non trovata", "OutputMessage label not found");
-	}
+        string italianLocale = "it-IT";
+        if (Project.Current.Locales.Contains(italianLocale))
+        {
+            var localizedTextItalian = new LocalizedText(Project.Current.NodeId.NamespaceIndex, key, it, italianLocale);
+            InformationModel.SetTranslation(localizedTextItalian);
+        }
+    }
+
+    private void AddTranslations()
+    {
+        AddTranslationIfNeeded("RecipesEditorRecipeNameEmpty", "Il nome della ricetta è vuoto", "Recipe name is empty");
+        AddTranslationIfNeeded("RecipesEditorRecipeSchemaNodeIdEmpty", "Il nodeId dello schema della ricetta è vuoto", "Recipe schema nodeId is empty");
+        AddTranslationIfNeeded("RecipesEditorRecipe", "Ricetta", "Recipe");
+        AddTranslationIfNeeded("RecipesEditorSaved", "aggiornata", "updated");
+        AddTranslationIfNeeded("RecipesEditorCreatedAndSaved", "creata e salvata", "created and saved");
+        AddTranslationIfNeeded("RecipesEditorErrorSavingRecipe", "Errore nel salvataggio della ricetta:", "Error saving recipe:");
+        AddTranslationIfNeeded("RecipesEditorRecipeNotFound", "Ricetta non trovata, nodeId:", "Recipe not found, nodeId:");
+        AddTranslationIfNeeded("RecipesEditorNotARecipe", "non è una ricetta", "is not a recipe");
+        AddTranslationIfNeeded("RecipesEditorStoreOfSchema", "Lo store dello schema", "Store of schema");
+        AddTranslationIfNeeded("RecipesEditorNotSet", "non è impostato", "is not set");
+        AddTranslationIfNeeded("RecipesEditorStore", "Store", "Store");
+        AddTranslationIfNeeded("RecipesEditorNotFound", "non trovato", "not found");
+        AddTranslationIfNeeded("RecipesEditorNotAStore", "non è uno store", "is not a store");
+        AddTranslationIfNeeded("RecipesEditorEditModelOfSchema", "EditModel dello schema", "EditModel of schema");
+        AddTranslationIfNeeded("RecipesEditorRecipesComboBoxNotFound", "Nodo RecipesComboBox non trovato", "RecipesComboBox node not found");
+        AddTranslationIfNeeded("RecipesEditorNotAComboBox", "non è una comboBox", "is not a comboBox");
+        AddTranslationIfNeeded("RecipesEditorOutputMessageLabelNotFound", "Etichetta OutputMessage non trovata", "OutputMessage label not found");
+    }
 }
