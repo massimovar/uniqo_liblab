@@ -994,7 +994,7 @@ Children:
       DataType: HorizontalAlignment
       ModellingRule: Optional
       Value: 1
-  - Name: LoadButton
+  - Name: UploadButton
     Type: Button
     Children:
     - Name: Text

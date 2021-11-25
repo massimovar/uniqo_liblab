@@ -572,7 +572,7 @@ Children:
             Type: PropertyType
             DataType: UInt16
             Value: 0
-    - Name: LoadButton
+    - Name: UploadButton
       Type: Button
       Children:
       - Name: EventHandler1
@@ -1046,12 +1046,12 @@ Children:
       Type: BaseVariableType
       DataType: VerticalAlignment
       ModellingRule: Optional
-      Value: 3
+      Value: 0
     - Name: Height
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 300.0
+      Value: 260.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size

@@ -32,7 +32,7 @@ public class RecipesEditorUISetup : BaseNetLogic
             target = GetTargetNode();
 
             SetTargetNodeToButtonMethod("ApplyButton", "DestinationNode");
-            SetTargetNodeToButtonMethod("LoadButton", "SourceNode");
+            SetTargetNodeToButtonMethod("UploadButton", "SourceNode");
 
             BuildUIFromSchemaRecursive(schemaEntries, controlsContainer, new List<string>());
         }
