@@ -12,6 +12,9 @@ using QPlatform.SQLiteStore;
 using QPlatform.Store;
 using QPlatform.CommunicationDriver;
 using QPlatform.Modbus;
+using QPlatform.TwinCat;
+using QPlatform.SerialPort;
+using QPlatform.Retentivity;
 #endregion
 
 public class RecipesEditorSaveButtonLogic : BaseNetLogic
@@ -30,7 +33,10 @@ public class RecipesEditorSaveButtonLogic : BaseNetLogic
             CreateOrSaveRecipe(newRecipeName, recipeSchema);
             schema.DeleteStoreRecipe(oldRecipeName);
             var activeRecipeName = Owner.Owner.GetVariable("ActiveRecipeName").Value.Value.ToString();
-            if (activeRecipeName != oldRecipeName) return;
+            if (activeRecipeName != oldRecipeName) {
+                GetComboBox().Refresh();
+                return;
+            }
             Owner.Owner.GetVariable("ActiveRecipeName").Value = newRecipeName;
             SetSelectedValueOnCombo(newRecipeName);
         }

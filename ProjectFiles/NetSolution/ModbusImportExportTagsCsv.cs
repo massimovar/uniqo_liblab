@@ -19,6 +19,9 @@ using System.Text;
 using QPlatform.Recipe;
 using QPlatform.SQLiteStore;
 using QPlatform.Store;
+using QPlatform.TwinCat;
+using QPlatform.SerialPort;
+using QPlatform.Retentivity;
 #endregion
 
 public class ModbusImportExportTagsCsv : BaseNetLogic

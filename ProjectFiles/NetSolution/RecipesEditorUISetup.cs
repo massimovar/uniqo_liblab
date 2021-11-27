@@ -13,6 +13,9 @@ using QPlatform.SQLiteStore;
 using QPlatform.Store;
 using QPlatform.CommunicationDriver;
 using QPlatform.Modbus;
+using QPlatform.TwinCat;
+using QPlatform.SerialPort;
+using QPlatform.Retentivity;
 #endregion
 
 public class RecipesEditorUISetup : BaseNetLogic

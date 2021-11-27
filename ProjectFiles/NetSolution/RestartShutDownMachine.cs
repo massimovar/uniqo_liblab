@@ -12,6 +12,9 @@ using QPlatform.NetLogic;
 using System.Diagnostics;
 using QPlatform.CommunicationDriver;
 using QPlatform.Modbus;
+using QPlatform.TwinCat;
+using QPlatform.SerialPort;
+using QPlatform.Retentivity;
 #endregion
 
 public class RestartShutDownMachine : BaseNetLogic

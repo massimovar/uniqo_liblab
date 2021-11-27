@@ -12,62 +12,66 @@ using QPlatform.Store;
 using QPlatform.SQLiteStore;
 using QPlatform.CommunicationDriver;
 using QPlatform.Modbus;
+using QPlatform.TwinCat;
+using QPlatform.SerialPort;
+using QPlatform.Retentivity;
 #endregion
 
 public class RecipesEditorComboBoxLogic : BaseNetLogic
 {
-	public override void Start()
-	{
-		var comboBox = (ComboBox)Owner;
-		comboBox.SelectedValueVariable.VariableChange += SelectedValueVariable_VariableChange;
+    public override void Start()
+    {
+        var comboBox = (ComboBox)Owner;
+        comboBox.SelectedValueVariable.VariableChange += SelectedValueVariable_VariableChange;
 
-		var lastSelectedRecipeName = Owner.Owner.GetVariable("LastSelectedRecipeName")?.Value;
-		if (lastSelectedRecipeName == null) return;
+        var lastSelectedRecipeName = Owner.Owner.GetVariable("LastSelectedRecipeName")?.Value;
+        if (lastSelectedRecipeName == null) return;
 
-		var lastSelectedRecipe = lastSelectedRecipeName.Value as Object;
-		var lastSelectedRecipeLT = lastSelectedRecipe as LocalizedText;
-		
-		if (string.IsNullOrEmpty(lastSelectedRecipeLT.Text) || lastSelectedRecipeLT.Text == "0") {
-			SelectedValueVariable_VariableChange(null, null);
-			return;
-		}
+        var lastSelectedRecipe = lastSelectedRecipeName.Value as Object;
+        var lastSelectedRecipeLT = lastSelectedRecipe as LocalizedText;
 
-		comboBox.SelectedValue = lastSelectedRecipeLT;
-	}
+        if (string.IsNullOrEmpty(lastSelectedRecipeLT.Text) || lastSelectedRecipeLT.Text == "0")
+        {
+            SelectedValueVariable_VariableChange(null, null);
+            return;
+        }
 
-	private void SelectedValueVariable_VariableChange(object sender, VariableChangeEventArgs e)
-	{
-		var comboBox = (ComboBox)Owner;
-		if (comboBox.SelectedValue == null)
-			return;
+        comboBox.SelectedValue = lastSelectedRecipeLT;
+    }
 
-		var recipeSchemaEditor = Owner.Owner;
-		var recipeSchemaVariable = recipeSchemaEditor.GetVariable("RecipeSchema");
-		if (recipeSchemaVariable == null)
-			return;
+    private void SelectedValueVariable_VariableChange(object sender, VariableChangeEventArgs e)
+    {
+        var comboBox = (ComboBox)Owner;
+        if (comboBox.SelectedValue == null)
+            return;
 
-		var recipeSchemaNodeId = (NodeId)recipeSchemaVariable.Value.Value;
+        var recipeSchemaEditor = Owner.Owner;
+        var recipeSchemaVariable = recipeSchemaEditor.GetVariable("RecipeSchema");
+        if (recipeSchemaVariable == null)
+            return;
 
-		var recipeSchemaObject = (RecipeSchema)InformationModel.Get(recipeSchemaNodeId);
-		if (recipeSchemaObject == null)
-			return;
+        var recipeSchemaNodeId = (NodeId)recipeSchemaVariable.Value.Value;
 
-		var editModelNode = recipeSchemaObject.GetObject("EditModel");
-		if (editModelNode == null)
-			return;
+        var recipeSchemaObject = (RecipeSchema)InformationModel.Get(recipeSchemaNodeId);
+        if (recipeSchemaObject == null)
+            return;
 
-		var recipeNameLocalizedText = comboBox.SelectedValue as LocalizedText;
-		if (recipeNameLocalizedText == null || recipeNameLocalizedText.IsEmpty())
-			return;
+        var editModelNode = recipeSchemaObject.GetObject("EditModel");
+        if (editModelNode == null)
+            return;
 
-		var recipeName = recipeNameLocalizedText.Text;
+        var recipeNameLocalizedText = comboBox.SelectedValue as LocalizedText;
+        if (recipeNameLocalizedText == null || recipeNameLocalizedText.IsEmpty())
+            return;
 
-		recipeSchemaObject.CopyFromStoreRecipe(recipeName, editModelNode.NodeId, CopyErrorPolicy.BestEffortCopy);
-	}
+        var recipeName = recipeNameLocalizedText.Text;
 
-	public override void Stop()
-	{
-		var comboBox = (ComboBox)Owner;
-		comboBox.SelectedValueVariable.VariableChange -= SelectedValueVariable_VariableChange;
-	}
+        recipeSchemaObject.CopyFromStoreRecipe(recipeName, editModelNode.NodeId, CopyErrorPolicy.BestEffortCopy);
+    }
+
+    public override void Stop()
+    {
+        var comboBox = (ComboBox)Owner;
+        comboBox.SelectedValueVariable.VariableChange -= SelectedValueVariable_VariableChange;
+    }
 }
