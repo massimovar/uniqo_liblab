@@ -1,0 +1,19 @@
+{
+	"version": "0.2.0",
+	"configurations" : [ 
+		{ 
+			"name" : "Attach to QRuntime",
+			"type" : "clr", 
+			"request" : "attach", 
+			"processName" : "QRuntime.exe", 
+			"justMyCode" : "false", 
+		}, 
+		{ 
+			"name" : "Attach to QStudio",
+			"type" : "clr", 
+			"request" : "attach", 
+			"processName" : "QStudio.exe", 
+			"justMyCode" : "false", 
+		} 
+	] 
+}

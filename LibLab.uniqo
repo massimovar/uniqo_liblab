@@ -87,13 +87,5 @@ Project:
    Uri: 'urn:QPlatform:Modbus:Net'
    Module: QPlatform.Modbus.Net
    Version: 4.0.19.71
-  23:
-   Uri: 'urn:QPlatform:Retentivity'
-   Module: QPlatform.Retentivity
-   Version: 3.0.53.71
-  24:
-   Uri: 'urn:QPlatform:Retentivity:Net'
-   Module: QPlatform.Retentivity.Net
-   Version: 2.0.53.71
  Nodes:
  - File: Nodes/LibLab.yaml

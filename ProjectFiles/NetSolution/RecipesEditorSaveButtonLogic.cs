@@ -30,8 +30,8 @@ public class RecipesEditorSaveButtonLogic : BaseNetLogic
         try
         {
             var schema = GetRecipeSchema(recipeSchema);
-            CreateOrSaveRecipe(newRecipeName, recipeSchema);
             schema.DeleteStoreRecipe(oldRecipeName);
+            CreateOrSaveRecipe(newRecipeName, recipeSchema);
             var activeRecipeName = Owner.Owner.GetVariable("ActiveRecipeName").Value.Value.ToString();
             if (activeRecipeName != oldRecipeName) {
                 GetComboBox().Refresh();
