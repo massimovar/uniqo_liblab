@@ -16,6 +16,9 @@ using QPlatform.Modbus;
 using QPlatform.TwinCat;
 using QPlatform.SerialPort;
 using QPlatform.Retentivity;
+using QPlatform.Datalogger;
+using QPlatform.EventLogger;
+using QPlatform.EthernetIP;
 #endregion
 
 public class RecipesEditorOutputMessageLogic : BaseNetLogic

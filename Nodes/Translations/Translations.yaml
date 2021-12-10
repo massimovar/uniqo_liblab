@@ -1,0 +1,30 @@
+Name: Translations
+Type: FolderType
+Children:
+- Name: LocalizationDictionary1
+  Type: LocalizationDictionary
+  DataType: String
+  ValueRank: OneOrMoreDimensions
+  ArrayDimensions: [0,0]
+  Value: 
+   {
+    "Type": 12,
+    "Dimensions": [15,3],
+    "Body": [
+     "","en-US","it-IT",
+     "Save","Save","Salva",
+     "Delete","Delete","Cancella",
+     "RecipeApply","Recipe applied","Ricetta applicata",
+     "Apply","Apply","Applica",
+     "Load","Load","Carica",
+     "RecipeDeleted","Recipe deleted","Ricetta eliminata",
+     "RecipeUploaded","Recipe uploaded","Ricetta caricata",
+     "ActiveRecipe","Active recipe","",
+     "Rename","Rename","Rinomina",
+     "RecipesTable","Recipes table","",
+     "Upload","Upload","Carica",
+     "RecipeLoaded","Recipe loaded","Ricetta caricata",
+     "LoginFormOutputErrorMessage","Wrong username or password","Username o password errati",
+     "LoginFormOutputSuccessfulMessage","Login successful","Accesso riuscito"
+    ]
+   }
