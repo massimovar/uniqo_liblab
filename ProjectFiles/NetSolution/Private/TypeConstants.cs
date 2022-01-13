@@ -30,6 +30,9 @@ namespace LibLab
         public static readonly NodeId page3 = new NodeId(
             NamespaceMapProvider.GetNamespaceIndex("LibLab"),
             new Guid("798abe481fbd03a6ae59b6cb155b9a22"));
+        public static readonly NodeId setMatrixElementValueBtn = new NodeId(
+            NamespaceMapProvider.GetNamespaceIndex("LibLab"),
+            new Guid("d24a79162d7a080ff925732bf74d9808"));
     }
 
     public static class VariableTypes

@@ -39,3 +39,8 @@ public class page1 : QPlatform.UI.Panel
 public class page3 : QPlatform.UI.Panel
 {
 }
+
+[MapType(NamespaceUri = "LibLab", Guid = "d24a79162d7a080ff925732bf74d9808")]
+public class setMatrixElementValueBtn : QPlatform.UI.Button
+{
+}
