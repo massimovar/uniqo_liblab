@@ -20,6 +20,11 @@ public class page2 : QPlatform.UI.Panel
 {
 }
 
+[MapType(NamespaceUri = "LibLab", Guid = "d24a79162d7a080ff925732bf74d9808")]
+public class setMatrixElementValueBtn : QPlatform.UI.Button
+{
+}
+
 [MapType(NamespaceUri = "LibLab", Guid = "43bd9fb016d2f4c22dcac897fff4052a")]
 public class advancedSVGImageType : QPlatform.UI.Panel
 {
@@ -37,10 +42,5 @@ public class page1 : QPlatform.UI.Panel
 
 [MapType(NamespaceUri = "LibLab", Guid = "798abe481fbd03a6ae59b6cb155b9a22")]
 public class page3 : QPlatform.UI.Panel
-{
-}
-
-[MapType(NamespaceUri = "LibLab", Guid = "d24a79162d7a080ff925732bf74d9808")]
-public class setMatrixElementValueBtn : QPlatform.UI.Button
 {
 }

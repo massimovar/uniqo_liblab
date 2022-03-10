@@ -18,6 +18,9 @@ namespace LibLab
         public static readonly NodeId page2 = new NodeId(
             NamespaceMapProvider.GetNamespaceIndex("LibLab"),
             new Guid("4d28c948255fcf08a70a69baa6ba311b"));
+        public static readonly NodeId setMatrixElementValueBtn = new NodeId(
+            NamespaceMapProvider.GetNamespaceIndex("LibLab"),
+            new Guid("d24a79162d7a080ff925732bf74d9808"));
         public static readonly NodeId advancedSVGImageType = new NodeId(
             NamespaceMapProvider.GetNamespaceIndex("LibLab"),
             new Guid("43bd9fb016d2f4c22dcac897fff4052a"));
@@ -30,9 +33,6 @@ namespace LibLab
         public static readonly NodeId page3 = new NodeId(
             NamespaceMapProvider.GetNamespaceIndex("LibLab"),
             new Guid("798abe481fbd03a6ae59b6cb155b9a22"));
-        public static readonly NodeId setMatrixElementValueBtn = new NodeId(
-            NamespaceMapProvider.GetNamespaceIndex("LibLab"),
-            new Guid("d24a79162d7a080ff925732bf74d9808"));
     }
 
     public static class VariableTypes

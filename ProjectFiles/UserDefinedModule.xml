@@ -34,6 +34,11 @@
         </TypeMapping>
         <TypeMapping>
             <TargetType>
+                <NodeId namespaceUri="LibLab" guid="d24a79162d7a080ff925732bf74d9808" />
+            </TargetType>
+        </TypeMapping>
+        <TypeMapping>
+            <TargetType>
                 <NodeId namespaceUri="LibLab" guid="43bd9fb016d2f4c22dcac897fff4052a" />
             </TargetType>
         </TypeMapping>
@@ -50,11 +55,6 @@
         <TypeMapping>
             <TargetType>
                 <NodeId namespaceUri="LibLab" guid="798abe481fbd03a6ae59b6cb155b9a22" />
-            </TargetType>
-        </TypeMapping>
-        <TypeMapping>
-            <TargetType>
-                <NodeId namespaceUri="LibLab" guid="d24a79162d7a080ff925732bf74d9808" />
             </TargetType>
         </TypeMapping>
     </TypeMappings>

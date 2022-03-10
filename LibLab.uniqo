@@ -5,87 +5,87 @@ Project:
  Company: ''
  Copyright: ''
  FormatVersion: 1
- CoreVersion: 7.1.1.48
+ CoreVersion: 7.1.1.51
  Dependencies:
   2:
    Uri: 'urn:QPlatform:CoreBase'
    Module: QPlatform.CoreBase
-   Version: 8.0.2.48
+   Version: 8.0.2.51
   3:
    Uri: 'urn:QPlatform:UI'
    Module: QPlatform.UI
-   Version: 42.2.1.48
+   Version: 42.2.1.51
   4:
    Uri: 'urn:QPlatform:HMIProject'
    Module: QPlatform.HMIProject
-   Version: 10.1.1.48
+   Version: 10.1.1.51
   5:
    Uri: 'urn:QPlatform:NativeUI'
    Module: QPlatform.NativeUI
-   Version: 25.4.1.48
+   Version: 25.4.1.51
   7:
    Uri: 'urn:QPlatform:Core:Net'
    Module: QPlatform.Core.Net
-   Version: 6.1.1.48
+   Version: 6.1.1.51
   8:
    Uri: 'urn:QPlatform:CoreBase:Net'
    Module: QPlatform.CoreBase.Net
-   Version: 5.0.2.48
+   Version: 5.0.2.51
   9:
    Uri: 'urn:QPlatform:UI:Net'
    Module: QPlatform.UI.Net
-   Version: 30.4.1.48
+   Version: 30.4.1.51
   10:
    Uri: 'urn:QPlatform:HMIProject:Net'
    Module: QPlatform.HMIProject.Net
-   Version: 6.1.1.48
+   Version: 6.1.1.51
   11:
    Uri: 'urn:QPlatform:Recipe'
    Module: QPlatform.Recipe
-   Version: 1.3.9.48
+   Version: 1.3.9.51
   12:
    Uri: 'urn:QPlatform:Recipe:Net'
    Module: QPlatform.Recipe.Net
-   Version: 1.2.9.48
+   Version: 1.2.9.51
   13:
    Uri: 'urn:QPlatform:NativeUI:Net'
    Module: QPlatform.NativeUI.Net
-   Version: 2.0.5.48
+   Version: 2.0.5.51
   14:
    Uri: 'urn:QPlatform:Store'
    Module: QPlatform.Store
-   Version: 2.1.21.48
+   Version: 2.1.21.51
   15:
    Uri: 'urn:QPlatform:Store:Net'
    Module: QPlatform.Store.Net
-   Version: 3.0.21.48
+   Version: 3.0.21.51
   16:
    Uri: 'urn:QPlatform:SQLiteStore'
    Module: QPlatform.SQLiteStore
-   Version: 2.1.11.48
+   Version: 2.1.11.51
   17:
    Uri: 'urn:QPlatform:SQLiteStore:Net'
    Module: QPlatform.SQLiteStore.Net
-   Version: 2.1.11.48
+   Version: 2.1.11.51
   18:
    Uri: 'urn:QPlatform:NetLogic'
    Module: QPlatform.NetLogic
-   Version: 4.1.2.48
+   Version: 4.1.2.51
   19:
    Uri: 'urn:QPlatform:CommunicationDriver'
    Module: QPlatform.CommunicationDriver
-   Version: 4.0.20.48
+   Version: 4.0.20.51
   20:
    Uri: 'urn:QPlatform:CommunicationDriver:Net'
    Module: QPlatform.CommunicationDriver.Net
-   Version: 3.0.20.48
+   Version: 3.0.20.51
   21:
    Uri: 'urn:QPlatform:ModbusDriver'
    Module: QPlatform.ModbusDriver
-   Version: 4.0.20.48
+   Version: 4.0.20.51
   22:
    Uri: 'urn:QPlatform:Modbus:Net'
    Module: QPlatform.Modbus.Net
-   Version: 4.0.20.48
+   Version: 4.0.20.51
  Nodes:
  - File: Nodes/LibLab.yaml

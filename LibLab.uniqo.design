@@ -5,7 +5,7 @@ Project:
  Company: ''
  Copyright: ''
  FormatVersion: 1
- CoreVersion: 7.1.1.48
+ CoreVersion: 7.1.1.51
  Dependencies:
   2:
    Uri: LibLab
@@ -13,13 +13,13 @@ Project:
   3:
    Uri: 'urn:QPlatform:CoreBase'
    Module: QPlatform.CoreBase
-   Version: 8.0.2.48
+   Version: 8.0.2.51
   5:
    Uri: 'urn:QPlatform:CoreBase:Net'
    Module: QPlatform.CoreBase.Net
-   Version: 5.0.2.48
+   Version: 5.0.2.51
   6:
    Uri: 'urn:QPlatform:NetLogic'
    Module: QPlatform.NetLogic
-   Version: 4.1.2.48
+   Version: 4.1.2.51
  Nodes: []
