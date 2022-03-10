@@ -86,11 +86,11 @@ Children:
   - Name: SenderEmailAddress
     Type: BaseDataVariableType
     DataType: String
-    Value: "massimovariolol@gmail.com"
+    Value: ""
   - Name: SenderEmailPassword
     Type: BaseDataVariableType
     DataType: Password
-    Value: "mVTID0ERz8sfCaMcxcXC"
+    Value: ""
   - Name: SMTPHostname
     Type: BaseDataVariableType
     DataType: String
